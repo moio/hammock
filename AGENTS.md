@@ -10,7 +10,4 @@ No backwards compatibility: do not add wrappers, compatibilty layers, etc. Corre
 
 # Skill writing
 
-Skills must:
- - be placed in `.agent/skills`
- - be harness-agnostic, do not make assumptions on features (eg. subagents)
- - only use Python, stdlib only, only if scripts are needed
+Use `skill-creator`.
