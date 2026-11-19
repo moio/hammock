@@ -1,5 +1,5 @@
 ---
-name: license
+name: ensure-license
 description: Set up or verify a repository's own OSS license file. Use when asked to add a license, fix a license file, or verify license files. Not for dependency license compliance scanning.
 ---
 
