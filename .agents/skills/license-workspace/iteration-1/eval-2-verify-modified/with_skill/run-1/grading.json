@@ -1,0 +1,32 @@
+{
+  "expectations": [
+    {
+      "text": "The report uses compare_spdx.py output (exact word diff) rather than an eyeballed summary",
+      "passed": true,
+      "evidence": "Transcript shows 'compare_spdx.py identify' and 'compare_spdx.py compare' invocations; final report quotes the word-level diff (WITHOUT\u2192WITH, ANY\u2192SOME)"
+    },
+    {
+      "text": "The report covers attribution: year, holder, placeholder check",
+      "passed": true,
+      "evidence": "Report flags stale year: git history 2018\u21922026 vs 'Copyright (c) 2018', proposes 2018-2026, asks before bumping"
+    },
+    {
+      "text": "No fixes applied without user approval",
+      "passed": true,
+      "evidence": "repo-diff.patch is empty; report lists proposed fixes pending approval"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 36,
+    "total_duration_seconds": 36
+  },
+  "execution_metrics": {
+    "total_tokens": 5238
+  }
+}

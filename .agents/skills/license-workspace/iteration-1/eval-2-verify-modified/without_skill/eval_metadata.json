@@ -1,0 +1,10 @@
+{
+  "eval_id": 2,
+  "eval_name": "eval-2-verify-modified",
+  "prompt": "Is our license file still correct? Someone said it might have been edited by accident.",
+  "expectations": [
+    "The report uses compare_spdx.py output (exact word diff) rather than an eyeballed summary",
+    "The report covers attribution: year, holder, placeholder check",
+    "No fixes applied without user approval"
+  ]
+}

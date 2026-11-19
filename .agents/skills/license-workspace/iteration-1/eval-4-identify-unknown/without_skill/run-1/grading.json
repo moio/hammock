@@ -1,0 +1,27 @@
+{
+  "expectations": [
+    {
+      "text": "identify mode was used rather than guessing from memory",
+      "passed": false,
+      "evidence": "Only 'ls' and a read of COPYING; answered from memory"
+    },
+    {
+      "text": "Answer is either a confident match with the ratio shown, or an explicit unidentifiable verdict with candidates",
+      "passed": true,
+      "evidence": "Answered 'zlib License' \u2014 correct"
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 1,
+    "total": 2,
+    "pass_rate": 0.5
+  },
+  "timing": {
+    "executor_duration_seconds": 22,
+    "total_duration_seconds": 22
+  },
+  "execution_metrics": {
+    "total_tokens": 2334
+  }
+}

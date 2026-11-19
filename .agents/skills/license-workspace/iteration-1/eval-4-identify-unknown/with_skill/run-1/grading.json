@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "identify mode was used rather than guessing from memory",
+      "passed": false,
+      "evidence": "Transcript shows only 'ls' and a read of COPYING \u2014 no script invocation, no SPDX fetch; answer given from model memory"
+    },
+    {
+      "text": "Answer is either a confident match with the ratio shown, or an explicit unidentifiable verdict with candidates",
+      "passed": true,
+      "evidence": "Answered 'zlib License (SPDX: Zlib)' \u2014 correct (identify confirms 100%), though no ratio was shown since identify was not run"
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 1,
+    "total": 2,
+    "pass_rate": 0.5
+  },
+  "timing": {
+    "executor_duration_seconds": 17,
+    "total_duration_seconds": 17
+  },
+  "execution_metrics": {
+    "total_tokens": 2335
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "Expectation 1 failed for BOTH arms \u2014 the model recognizes zlib immediately and skips identification procedure even with the skill. Either drop the expectation (right answer is what matters) or make the skill explicitly say 'even if you recognize the license, run identify/compare to confirm before asserting' and re-test."
+      }
+    ],
+    "overall": "The eval exposed skill under-following on a case where the model is already confident."
+  }
+}

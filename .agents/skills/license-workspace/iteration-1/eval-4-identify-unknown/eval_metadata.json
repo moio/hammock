@@ -1,0 +1,9 @@
+{
+  "eval_id": 4,
+  "eval_name": "eval-4-identify-unknown",
+  "prompt": "What license is this file?",
+  "expectations": [
+    "identify mode was used rather than guessing from memory",
+    "Answer is either a confident match with the ratio shown, or an explicit unidentifiable verdict with candidates"
+  ]
+}

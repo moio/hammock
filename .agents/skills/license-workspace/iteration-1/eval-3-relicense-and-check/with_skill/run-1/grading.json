@@ -1,0 +1,32 @@
+{
+  "expectations": [
+    {
+      "text": "Response includes the relicense consent warning before proposing edits",
+      "passed": true,
+      "evidence": "Report warns 'relicensing requires consent from all copyright holders of existing contributions' before the proposed-plan section; no edits made (LICENSE still GPL in outputs)"
+    },
+    {
+      "text": "vendor/LICENSE-APACHE is compared against Apache-2.0 canonical text with the script",
+      "passed": true,
+      "evidence": "Transcript shows compare_spdx.py identify + compare on vendor/lib/LICENSE-APACHE; report quotes the exact diff (non-exclusive \u2192 exclusive, both grant sections)"
+    },
+    {
+      "text": "Report distinguishes term mismatches from attribution issues",
+      "passed": true,
+      "evidence": "Table has separate Terms and Attribution columns; term mismatch and attribution status reported independently"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 49,
+    "total_duration_seconds": 49
+  },
+  "execution_metrics": {
+    "total_tokens": 6290
+  }
+}

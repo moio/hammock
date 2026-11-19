@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "The report uses compare_spdx.py output (exact word diff) rather than an eyeballed summary",
+      "passed": false,
+      "evidence": "No script use in transcript; diff was produced by eyeball comparison against remembered MIT text (accurate here, but the unscripted method produced a false-negative on eval-3's identical setup)"
+    },
+    {
+      "text": "The report covers attribution: year, holder, placeholder check",
+      "passed": false,
+      "evidence": "Report states \"Everything else, including the 'Copyright (c) 2018 Jane Doe' line, matches the standard MIT text\" \u2014 missed that git history spans 2018\u21922026, so the year is stale"
+    },
+    {
+      "text": "No fixes applied without user approval",
+      "passed": true,
+      "evidence": "repo-diff.patch is empty; asked before fixing"
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 2,
+    "total": 3,
+    "pass_rate": 0.33
+  },
+  "timing": {
+    "executor_duration_seconds": 44,
+    "total_duration_seconds": 44
+  },
+  "execution_metrics": {
+    "total_tokens": 3055
+  },
+  "eval_feedback": {
+    "overall": "Baseline found the term edits but missed the attribution finding the skill caught."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "eval_id": 1,
+  "eval_name": "eval-1-install-mit",
+  "prompt": "Add a license to this repo. My name is Jane Doe, email jane@example.com. I want MIT.",
+  "expectations": [
+    "A LICENSE file exists whose terms match SPDX MIT (compare_spdx.py exit 0)",
+    "The copyright line names Jane Doe with a current year",
+    "No placeholder markers (<year>, [yyyy]) remain in the file"
+  ]
+}

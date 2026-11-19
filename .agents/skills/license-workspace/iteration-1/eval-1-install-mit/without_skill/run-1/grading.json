@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "A LICENSE file exists whose terms match SPDX MIT (compare_spdx.py exit 0)",
+      "passed": true,
+      "evidence": "Script run on outputs/LICENSE: 'OK \u2014 terms match SPDX MIT'"
+    },
+    {
+      "text": "The copyright line names Jane Doe with a current year",
+      "passed": true,
+      "evidence": "'Copyright (c) 2026 Jane Doe <jane@example.com>' in outputs/LICENSE"
+    },
+    {
+      "text": "No placeholder markers (<year>, [yyyy]) remain in the file",
+      "passed": true,
+      "evidence": "grep finds no placeholder markers"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 34,
+    "total_duration_seconds": 34
+  },
+  "execution_metrics": {
+    "total_tokens": 2253
+  },
+  "eval_feedback": {
+    "overall": "See with_skill feedback \u2014 eval does not discriminate between arms."
+  }
+}

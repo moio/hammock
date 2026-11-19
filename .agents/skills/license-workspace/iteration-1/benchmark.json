@@ -1,0 +1,326 @@
+{
+  "metadata": {
+    "skill_name": "license",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-11-19T08:43:16Z",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 35,
+        "tokens": 4722,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A LICENSE file exists whose terms match SPDX MIT (compare_spdx.py exit 0)",
+          "passed": true,
+          "evidence": "Script run on outputs/LICENSE: 'OK \u2014 terms match SPDX MIT'. Transcript also shows the run itself verified with the script after writing."
+        },
+        {
+          "text": "The copyright line names Jane Doe with a current year",
+          "passed": true,
+          "evidence": "'Copyright (c) 2026 Jane Doe <jane@example.com>' in outputs/LICENSE"
+        },
+        {
+          "text": "No placeholder markers (<year>, [yyyy]) remain in the file",
+          "passed": true,
+          "evidence": "grep finds no placeholder markers in outputs/LICENSE"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 36,
+        "tokens": 5238,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The report uses compare_spdx.py output (exact word diff) rather than an eyeballed summary",
+          "passed": true,
+          "evidence": "Transcript shows 'compare_spdx.py identify' and 'compare_spdx.py compare' invocations; final report quotes the word-level diff (WITHOUT\u2192WITH, ANY\u2192SOME)"
+        },
+        {
+          "text": "The report covers attribution: year, holder, placeholder check",
+          "passed": true,
+          "evidence": "Report flags stale year: git history 2018\u21922026 vs 'Copyright (c) 2018', proposes 2018-2026, asks before bumping"
+        },
+        {
+          "text": "No fixes applied without user approval",
+          "passed": true,
+          "evidence": "repo-diff.patch is empty; report lists proposed fixes pending approval"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 49,
+        "tokens": 6290,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Response includes the relicense consent warning before proposing edits",
+          "passed": true,
+          "evidence": "Report warns 'relicensing requires consent from all copyright holders of existing contributions' before the proposed-plan section; no edits made (LICENSE still GPL in outputs)"
+        },
+        {
+          "text": "vendor/LICENSE-APACHE is compared against Apache-2.0 canonical text with the script",
+          "passed": true,
+          "evidence": "Transcript shows compare_spdx.py identify + compare on vendor/lib/LICENSE-APACHE; report quotes the exact diff (non-exclusive \u2192 exclusive, both grant sections)"
+        },
+        {
+          "text": "Report distinguishes term mismatches from attribution issues",
+          "passed": true,
+          "evidence": "Table has separate Terms and Attribution columns; term mismatch and attribution status reported independently"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 1,
+        "failed": 1,
+        "total": 2,
+        "time_seconds": 17,
+        "tokens": 2335,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "identify mode was used rather than guessing from memory",
+          "passed": false,
+          "evidence": "Transcript shows only 'ls' and a read of COPYING \u2014 no script invocation, no SPDX fetch; answer given from model memory"
+        },
+        {
+          "text": "Answer is either a confident match with the ratio shown, or an explicit unidentifiable verdict with candidates",
+          "passed": true,
+          "evidence": "Answered 'zlib License (SPDX: Zlib)' \u2014 correct (identify confirms 100%), though no ratio was shown since identify was not run"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 34,
+        "tokens": 2253,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A LICENSE file exists whose terms match SPDX MIT (compare_spdx.py exit 0)",
+          "passed": true,
+          "evidence": "Script run on outputs/LICENSE: 'OK \u2014 terms match SPDX MIT'"
+        },
+        {
+          "text": "The copyright line names Jane Doe with a current year",
+          "passed": true,
+          "evidence": "'Copyright (c) 2026 Jane Doe <jane@example.com>' in outputs/LICENSE"
+        },
+        {
+          "text": "No placeholder markers (<year>, [yyyy]) remain in the file",
+          "passed": true,
+          "evidence": "grep finds no placeholder markers"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.33,
+        "passed": 1,
+        "failed": 2,
+        "total": 3,
+        "time_seconds": 44,
+        "tokens": 3055,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The report uses compare_spdx.py output (exact word diff) rather than an eyeballed summary",
+          "passed": false,
+          "evidence": "No script use in transcript; diff was produced by eyeball comparison against remembered MIT text (accurate here, but the unscripted method produced a false-negative on eval-3's identical setup)"
+        },
+        {
+          "text": "The report covers attribution: year, holder, placeholder check",
+          "passed": false,
+          "evidence": "Report states \"Everything else, including the 'Copyright (c) 2018 Jane Doe' line, matches the standard MIT text\" \u2014 missed that git history spans 2018\u21922026, so the year is stale"
+        },
+        {
+          "text": "No fixes applied without user approval",
+          "passed": true,
+          "evidence": "repo-diff.patch is empty; asked before fixing"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.0,
+        "passed": 0,
+        "failed": 3,
+        "total": 3,
+        "time_seconds": 73,
+        "tokens": 15143,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Response includes the relicense consent warning before proposing edits",
+          "passed": false,
+          "evidence": "Applied the relicense first (repo-diff.patch shows LICENSE and pyproject.toml rewritten) and only mentioned consent afterwards as a 'legal note'"
+        },
+        {
+          "text": "vendor/LICENSE-APACHE is compared against Apache-2.0 canonical text with the script",
+          "passed": false,
+          "evidence": "No bundled script (none available without the skill); compared against apache.org text by hand and concluded 'no hand edits' \u2014 a false negative: the words 'non-' were deleted from both grant sections"
+        },
+        {
+          "text": "Report distinguishes term mismatches from attribution issues",
+          "passed": false,
+          "evidence": "Report conflates: declares vendor file verbatim/safe (wrong), then discusses NOTICE obligations; no distinct attribution check"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 1,
+        "failed": 1,
+        "total": 2,
+        "time_seconds": 22,
+        "tokens": 2334,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "identify mode was used rather than guessing from memory",
+          "passed": false,
+          "evidence": "Only 'ls' and a read of COPYING; answered from memory"
+        },
+        {
+          "text": "Answer is either a confident match with the ratio shown, or an explicit unidentifiable verdict with candidates",
+          "passed": true,
+          "evidence": "Answered 'zlib License' \u2014 correct"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.875,
+        "stddev": 0.25,
+        "min": 0.5,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 34.25,
+        "stddev": 13.1498,
+        "min": 17,
+        "max": 49
+      },
+      "tokens": {
+        "mean": 4646.25,
+        "stddev": 1673.2898,
+        "min": 2335,
+        "max": 6290
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.4575,
+        "stddev": 0.417,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 43.25,
+        "stddev": 21.7773,
+        "min": 22,
+        "max": 73
+      },
+      "tokens": {
+        "mean": 5696.25,
+        "stddev": 6308.1424,
+        "min": 2253,
+        "max": 15143
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.42",
+      "time_seconds": "-9.0",
+      "tokens": "-1050"
+    }
+  },
+  "notes": [
+    "eval-1 passes 100% in both configurations \u2014 non-discriminating. The proposed process expectation ('transcript shows terms verified against SPDX, not written from memory') would separate the arms: the baseline wrote MIT from memory with zero SPDX references.",
+    "eval-3 discriminates most strongly (with_skill 3/3, without_skill 0/3): the baseline mis-verified the tampered Apache file ('no hand edits' \u2014 false negative, two grant-section words changed) and applied the relicense before delivering the consent warning.",
+    "eval-4 fails its first expectation in both arms: the model recognizes zlib immediately and skips the identify procedure even when the skill instructs it \u2014 skill under-following on a case where the model is already confident.",
+    "With-skill runs average faster (34.2s vs 43.2s) and slightly fewer tokens (4646 vs 5696) despite loading the skill; the baseline's unscripted eval-3 relicense (~12k tokens) drives most of the gap.",
+    "Single run per configuration \u2014 the \u00b125%/\u00b142% stddevs come from cross-eval variation, not run variance; repeated runs would be needed to estimate flakiness."
+  ]
+}

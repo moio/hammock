@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "A LICENSE file exists whose terms match SPDX MIT (compare_spdx.py exit 0)",
+      "passed": true,
+      "evidence": "Script run on outputs/LICENSE: 'OK \u2014 terms match SPDX MIT'. Transcript also shows the run itself verified with the script after writing."
+    },
+    {
+      "text": "The copyright line names Jane Doe with a current year",
+      "passed": true,
+      "evidence": "'Copyright (c) 2026 Jane Doe <jane@example.com>' in outputs/LICENSE"
+    },
+    {
+      "text": "No placeholder markers (<year>, [yyyy]) remain in the file",
+      "passed": true,
+      "evidence": "grep finds no placeholder markers in outputs/LICENSE"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 35,
+    "total_duration_seconds": 35
+  },
+  "execution_metrics": {
+    "total_tokens": 4722
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "All three expectations also pass for the baseline (its LICENSE is canonical MIT with correct attribution) \u2014 eval-1 does not discriminate. Consider adding: 'transcript shows the terms were verified against SPDX (fetched or script-checked), not written from memory' \u2014 with-skill verified, baseline wrote from memory with no verification."
+      }
+    ],
+    "overall": "Eval verifies the outcome but not the process; both arms pass."
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "skill_name": "license",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Add a license to this repo. My name is Jane Doe, email jane@example.com. I want MIT.",
+      "expected_output": "LICENSE file created with canonical MIT terms and copyright line 'Copyright (c) <current year> Jane Doe' (email included only if the harness's convention allows — either form acceptable if consistent); user asked about org vs individual if metadata suggests ambiguity.",
+      "files": [],
+      "expectations": [
+        "A LICENSE file exists whose terms match SPDX MIT (compare_spdx.py exit 0)",
+        "The copyright line names Jane Doe with a current year",
+        "No placeholder markers (<year>, [yyyy]) remain in the file"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Is our license file still correct? Someone said it might have been edited by accident.",
+      "expected_output": "Verification report in the skill's table format: SPDX identification, script-based term comparison, attribution check (year/holder/consistency). Any word-level term modification is reported with the exact diff, not paraphrased.",
+      "files": [],
+      "expectations": [
+        "The report uses compare_spdx.py output (exact word diff) rather than an eyeballed summary",
+        "The report covers attribution: year, holder, placeholder check",
+        "No fixes applied without user approval"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We want to relicense from GPL-3.0-only to Apache-2.0. Also our LICENSE-APACHE file in vendor/ has been hand-edited — check it.",
+      "expected_output": "Relicensing consent warning before any change; GPL -only/-or-later header note; verification of vendor/LICENSE-APACHE against SPDX Apache-2.0 with exact diffs and a proposed-fix list pending approval.",
+      "files": [],
+      "expectations": [
+        "Response includes the relicense consent warning before proposing edits",
+        "vendor/LICENSE-APACHE is compared against Apache-2.0 canonical text with the script",
+        "Report distinguishes term mismatches from attribution issues"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "What license is this file? (points at a license file with no name/metadata hints)",
+      "expected_output": "compare_spdx.py identify run; confident answer at ≥95% or an honest 'unidentifiable, closest candidates: ...' — never a guessed single ID below threshold.",
+      "files": [],
+      "expectations": [
+        "identify mode was used rather than guessing from memory",
+        "Answer is either a confident match with the ratio shown, or an explicit unidentifiable verdict with candidates"
+      ]
+    }
+  ]
+}

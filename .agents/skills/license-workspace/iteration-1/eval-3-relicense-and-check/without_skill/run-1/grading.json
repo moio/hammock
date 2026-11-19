@@ -1,0 +1,43 @@
+{
+  "expectations": [
+    {
+      "text": "Response includes the relicense consent warning before proposing edits",
+      "passed": false,
+      "evidence": "Applied the relicense first (repo-diff.patch shows LICENSE and pyproject.toml rewritten) and only mentioned consent afterwards as a 'legal note'"
+    },
+    {
+      "text": "vendor/LICENSE-APACHE is compared against Apache-2.0 canonical text with the script",
+      "passed": false,
+      "evidence": "No bundled script (none available without the skill); compared against apache.org text by hand and concluded 'no hand edits' \u2014 a false negative: the words 'non-' were deleted from both grant sections"
+    },
+    {
+      "text": "Report distinguishes term mismatches from attribution issues",
+      "passed": false,
+      "evidence": "Report conflates: declares vendor file verbatim/safe (wrong), then discusses NOTICE obligations; no distinct attribution check"
+    }
+  ],
+  "summary": {
+    "passed": 0,
+    "failed": 3,
+    "total": 3,
+    "pass_rate": 0.0
+  },
+  "timing": {
+    "executor_duration_seconds": 73,
+    "total_duration_seconds": 73
+  },
+  "execution_metrics": {
+    "total_tokens": 15143
+  },
+  "claims": [
+    {
+      "claim": "vendor/lib/LICENSE-APACHE is the verbatim Apache-2.0 text with no hand edits",
+      "type": "factual",
+      "verified": false,
+      "evidence": "compare_spdx.py shows word-level diffs vs canonical: 'non-exclusive' \u2192 'exclusive' in sections 2 and 3"
+    }
+  ],
+  "eval_feedback": {
+    "overall": "This eval discriminates strongly: baseline produced a false-negative verification and edited the license before consent."
+  }
+}
