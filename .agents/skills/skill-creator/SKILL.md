@@ -54,6 +54,17 @@ cloud-deploy/
     └── azure.md
 ```
 
+### Invariant-driven skills
+
+Many skills enforce a desired state on a project rather than perform a one-off task — a license file present with correct attribution, a config matching a template, a check passing. Write these as a **specification plus convergence**, not a procedure:
+
+- State the **invariant** first, before any instructions: what must be true, phrased independently of the current state. Everything else in the skill derives from comparing reality to that statement.
+- Frame the work as **detect drift, then converge**: report what diverges from the invariant and propose/apply minimal fixes. Modes like "create" and "verify" are just convergence actions derived from that comparison — don't write them as disconnected procedures.
+- Where the invariant has a canonical reference (template, pinned text, example), bundle it in `references/` or `assets/` so checking is diff-against-canon, not judgment.
+- Say what idempotence means for the skill: running its apply step twice changes nothing the second time. This doubles as a self-test when you validate the skill.
+
+The approach scales down to softer domains too: an invariant can be qualitative ("all user-facing error messages follow the project's tone guide"), with the canon as a reference doc and convergence as editorial suggestions. But don't force it onto skills that are genuine workflows with no fixed end state — an invariant nobody could ever check is dead weight.
+
 ## Test
 
 Ask 1–3 test prompts a real user would type (share them with the user first). Run each by reading the skill and following its instructions yourself — one at a time is fine. Present outputs to the user, ask for feedback, improve, and repeat until they're satisfied. Skip elaborate baselines and metrics unless the user asks.
