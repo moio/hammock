@@ -7,7 +7,7 @@ description: Set up or verify a repository's own OSS license file. Downloads the
 
 Goal: the repository contains license file(s) whose **terms** are byte-equivalent to the canonical SPDX text (no modifications), with **copyright year and holder** correctly set.
 
-Scope: the repository's own license only. Out of scope: license compliance of dependencies, LICENSE-vs-COPYING nuances beyond file detection, third-party notices files (do not touch them).
+Scope: the repository's own license file(s) at the project root only. Out of scope: licenses in subdirectories and vendored code (do not touch or report them), license compliance of dependencies, third-party notices files (do not touch them).
 
 ## Inputs you need
 
@@ -45,7 +45,7 @@ When the repo has no license file, or the user wants a different license than th
 
 When the repo already has license file(s):
 
-1. **Find them**: search for `LICENSE*`, `LICENCE*`, `COPYING*`, `COPYRIGHT*`, `NOTICE*` in the root and any subdirectory. Multiple license files are legitimate (dual licensing, per-directory licenses, `LICENSE-APACHE`/`LICENSE-MIT` pairs) — inventory them all before judging.
+1. **Find them**: search for `LICENSE*`, `LICENCE*`, `COPYING*`, `COPYRIGHT*`, `NOTICE*` in the project root only — do not descend into subdirectories. Multiple license files at the root are legitimate (dual licensing, `LICENSE-APACHE`/`LICENSE-MIT` pairs) — inventory them all before judging.
 
 2. **Compare terms against SPDX**: strip the copyright line(s) (lines matching `Copyright \(c\)\|Copyright ©\|©`) and compare the remainder with the canonical SPDX text for the best-matching identifier. Whitespace and trailing-newline differences are fine; **any word-level difference in the terms is a finding** — report the exact diverging lines. If you cannot identify which SPDX license the text matches, say so explicitly and list the closest candidates rather than guessing.
 
@@ -56,7 +56,7 @@ When the repo already has license file(s):
 
 4. **Check compatibility across files** (only when there are multiple distinct licenses):
    - Report the license combination and whether it is a *declared* dual/multi-license (e.g. `LICENSE-APACHE` + `LICENSE-MIT`, or "OR" expressions in package metadata) or an *accidental* mix (e.g. a vendored GPL directory next to an MIT root).
-   - For an accidental mix, check directionality: permissive into permissive is generally fine; GPL-family code inside a more permissive project is a real finding — report it, do not attempt to fix it yourself. Point at the affected paths.
+   - For an accidental mix, check directionality: permissive into permissive is generally fine; GPL-family terms inside a more permissive project is a real finding — report it, do not attempt to fix it yourself. Point at the affected files.
    - Note: this is structural compatibility of the repo's own files, not dependency compliance — restate that if the results could be misread that way.
 
 5. **Report format** — a short table:
