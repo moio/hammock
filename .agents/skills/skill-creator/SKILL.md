@@ -14,8 +14,9 @@ The conversation often already contains the workflow ("turn this into a skill").
 1. What should the skill enable the model to do?
 2. When should it trigger?
 3. What does good output look like?
+4. What kind is it — does it enforce a fixed end state on the project (invariant, the default), or is it a multi-step process with no fixed end state (workflow)?
 
-## Write the SKILL.md
+## Anatomy and frontmatter
 
 ```
 skill-name/
@@ -26,12 +27,16 @@ skill-name/
 └── scripts/  (optional — Python, stdlib only)
 ```
 
-- **name**: kebab-case identifier, same as the directory name.
+Place skills in `.agents/skills/<skill-name>/`.
+
+- **name**: kebab-case identifier, same as the directory name. The name signals the kind decided in Capture intent:
+  - **Invariant skills** (the default) get the `ensure-` prefix: `ensure-license`, `ensure-changelog`. The prefix reads as the desired state ("ensure the license is right") and composes predictably.
+  - **Workflow skills** get a role name, with no verb: `skill-creator`, `release-manager`. The name describes what the skill *is*, not an action.
 - **description**: the only triggering mechanism. State what it does AND when to use it, including contexts where the user wouldn't name it explicitly. Slightly pushy descriptions counter undertriggering: instead of "Builds dashboards", write "Builds internal dashboards. Use whenever the user mentions dashboards, metrics, or displaying company data."
 - **compatibility**: optional and rarely needed. Only add it when the skill requires specific tools, commands, or dependencies to be present in the environment (e.g. "requires gh and jq").
 - **Body**: instructions only. All "when to use" info goes in the description, not the body.
 
-Place skills in `.agents/skills/<skill-name>/`.
+## Writing the body
 
 ### Writing rules
 
@@ -40,19 +45,16 @@ Place skills in `.agents/skills/<skill-name>/`.
 - Generalize: instructions should work across many prompts, not just the examples that inspired the skill. Watch for overfitted rules and all-caps rigidness — reframe them.
 - Harness-agnostic: don't assume subagents, special tools, browser access, or a specific product. Say "do X yourself or in parallel if the harness allows".
 - Scripts, if any, must be Python with stdlib only.
+- When a skill supports multiple domains or frameworks, organize by variant so the model only reads what's relevant:
 
-### Domain organization
-
-When a skill supports multiple domains or frameworks, organize by variant so the model only reads what's relevant:
-
-```
-cloud-deploy/
-├── SKILL.md (workflow + which reference to pick)
-└── references/
-    ├── aws.md
-    ├── gcp.md
-    └── azure.md
-```
+  ```
+  cloud-deploy/
+  ├── SKILL.md (workflow + which reference to pick)
+  └── references/
+      ├── aws.md
+      ├── gcp.md
+      └── azure.md
+  ```
 
 ### Invariant-driven skills
 
@@ -73,8 +75,8 @@ Ask 1–3 test prompts a real user would type (share them with the user first). 
 
 Before finishing, check the skill structurally:
 
-```bash
-python .agents/skills/skill-creator/scripts/validate_skill.py <skill-dir>
+```sh
+python .agents/skills/ensure-license/scripts/validate_skill.py <skill-dir>
 ```
 
 Checks frontmatter format, name conventions, and description limits.
