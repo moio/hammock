@@ -1,0 +1,2 @@
+ - `.agent/skills` houses skills for this project
+ - skills are harness-agnostic - they do not make assumptions on their features (eg. subagents)
