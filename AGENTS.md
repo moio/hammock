@@ -8,6 +8,7 @@ No cruft: whenever you restructure things, clean up what you touch.
 
 No backwards compatibility: do not add wrappers, compatibilty layers, etc. Correct callers when changing signatures.
 
-# Skill writing
+# Coding rules
 
-Use `skill-creator`.
+ - Use `skill-creator` to author or improve skills
+ - assume `sh` as the shell
